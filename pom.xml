@@ -53,6 +53,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
@@ -72,5 +78,11 @@
 			</plugin>
 		</plugins>
 	</build>
-
+<distributionManagement>
+        <repository>
+         <id>deploymentRepo</id>
+         <name>admin</name>
+        <url>http://192.168.1.19:8081/repository/maven-releases/</url>
+       </repository>
+      </distributionManagement>
 </project>
