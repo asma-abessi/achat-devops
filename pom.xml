@@ -15,7 +15,7 @@
 	<description>Projet pour le module DevOps</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<maven-jar-plugin.version>3.0.1</maven-jar-plugin.version>
+		<maven-jar-plugin.version>2.4.1</maven-jar-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -64,7 +64,7 @@
 
 	<build>
 		<plugins>
-		<!--  	<plugin>
+		  	<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>2.4.1</version>
@@ -76,21 +76,21 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin> -->
+			</plugin> 
 
 			<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-resources-plugin</artifactId>
-			  <version>3.0.1</version>
-			  <executions>
-      <execution>
+			  <version>2.4.1</version>
+		 <!--	  <executions>
+       <execution>
          <id>default-deploy</id>
          <phase>deploy</phase>
          <goals>
             <goal>deploy</goal>
          </goals>
       </execution>
-   </executions>
+   </executions>-->
 		    </plugin>
 		    
 		  
