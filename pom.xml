@@ -53,22 +53,11 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>3.0.0</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
 
 	</dependencies>
 
 	<build>
 		<plugins>
-		<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-resources-plugin</artifactId>
-			  <version>3.1.0</version>
-		    </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -81,18 +70,13 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			
-		    
 		</plugins>
 	</build>
-	
-       <distributionManagement>
+     <distributionManagement>
         <repository>
-         <id>nexus</id>
+         <id>deploymentRepo</id>
          <name>admin</name>
         <url>http://192.168.1.19:8081/repository/maven-releases/</url>
        </repository>
       </distributionManagement>
-      
-     
 </project>
