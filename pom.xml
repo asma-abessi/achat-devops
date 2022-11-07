@@ -65,10 +65,14 @@
 	<build>
 		<plugins>
 		<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.1</version>
-					<configuration>
+			  <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-resources-plugin</artifactId>
+			  <version>3.1.0</version>
+		    </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -77,14 +81,14 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			
+		    
 		</plugins>
-		<finalName>devops</finalName>
-
 	</build>
 	
        <distributionManagement>
         <repository>
-         <id>deploymentRepo</id>
+         <id>nexus</id>
          <name>admin</name>
         <url>http://192.168.1.19:8081/repository/maven-releases/</url>
        </repository>
