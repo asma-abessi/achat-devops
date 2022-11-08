@@ -61,7 +61,7 @@
 		<plugin>
 			  <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-resources-plugin</artifactId>
-			  <version>3.0.1</version>
+			  <version>3.1.0</version>
 		</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -83,10 +83,6 @@
          <name>admin</name>
         <url>http://192.168.1.19:8081/repository/maven-releases/</url>
        </repository>
-        <snapshotRepository>
-      <id>deploymentRepo</id>
-      <name>admin</name>
-      <url>http://192.168.1.19:8081/repository/maven-releases/</url>
-    </snapshotRepository>
-      </distributionManagement>
+      </distributionManagement> 
+     
 </project>
