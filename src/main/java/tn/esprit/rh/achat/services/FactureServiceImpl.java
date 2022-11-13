@@ -9,7 +9,6 @@ import tn.esprit.rh.achat.repositories.*;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Slf4j
@@ -26,55 +25,43 @@ public class FactureServiceImpl implements IFactureService {
 	FournisseurRepository fournisseurRepository;
 	@Autowired
 	ProduitRepository produitRepository;
-    @Autowired
-    ReglementServiceImpl reglementService;
-	
+	@Autowired
+	ReglementServiceImpl reglementService;
+
 	@Override
 	public List<Facture> retrieveAllFactures() {
-		List<Facture> factures = (List<Facture>) factureRepository.findAll();
-		for (Facture facture : factures) {
-			log.info(" facture : " + facture);
-		}
-		return factures;
+		return factureRepository.findAll();
 	}
 
-	
-	public Facture addFacture(Facture f) {
-		return factureRepository.save(f);
+
+	public Facture addFacture(FactureRequestModel f) {
+		Facture facture1= new Facture(f.idFacture,f.montantRemise,f.montantFacture,f.dateCreationFacture);
+		factureRepository.save(facture1);
+		return facture1;
 	}
 
+
+	public Facture updateFacture(FactureRequestModel f) {
+		factureRepository.save( new Facture(f.idFacture,f.montantRemise,f.montantFacture,f.dateCreationFacture));
+		return  new Facture(f.idFacture,f.montantRemise,f.montantFacture,f.dateCreationFacture);
+	}
+
+
+	public void deleteFacture(Long factureId) {
+		factureRepository.deleteById(factureId);
+
+	}
 	/*
 	 * calculer les montants remise et le montant total d'un détail facture
 	 * ainsi que les montants d'une facture
 	 */
-	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
-		float montantFacture = 0;
-		float montantRemise = 0;
-		for (DetailFacture detail : detailsFacture) {
-			//Récuperer le produit 
-			Produit produit = produitRepository.findById(detail.getProduit().getIdProduit()).get();
-			//Calculer le montant total pour chaque détail Facture
-			float prixTotalDetail = detail.getQteCommandee() * produit.getPrix();
-			//Calculer le montant remise pour chaque détail Facture
-			float montantRemiseDetail = (prixTotalDetail * detail.getPourcentageRemise()) / 100;
-			float prixTotalDetailRemise = prixTotalDetail - montantRemiseDetail;
-			detail.setMontantRemise(montantRemiseDetail);
-			detail.setPrixTotalDetail(prixTotalDetailRemise);
-			//Calculer le montant total pour la facture
-			montantFacture = montantFacture + prixTotalDetailRemise;
-			//Calculer le montant remise pour la facture
-			montantRemise = montantRemise + montantRemiseDetail;
-			detailFactureRepository.save(detail);
-		}
-		f.setMontantFacture(montantFacture);
-		f.setMontantRemise(montantRemise);
+	private Facture addDetailsFacture(Facture f ){
 		return f;
 	}
 
 	@Override
 	public void cancelFacture(Long factureId) {
-		// Méthode 01
-		//Facture facture = factureRepository.findById(factureId).get();
+
 		Facture facture = factureRepository.findById(factureId).orElse(new Facture());
 		facture.setArchivee(true);
 		factureRepository.save(facture);
@@ -91,18 +78,13 @@ public class FactureServiceImpl implements IFactureService {
 	}
 
 	@Override
-	public List<Facture> getFacturesByFournisseur(Long idFournisseur) {
-		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-		return (List<Facture>) fournisseur.getFactures();
+	public List<Facture> getFacturesByFournisseur(Long idFacture) {
+		Facture facture = factureRepository.findById(idFacture).orElse(null);
+		return (List<Facture>) facture;
 	}
 
-	@Override
-	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
-		Facture facture = factureRepository.findById(idFacture).orElse(null);
-		Operateur operateur = operateurRepository.findById(idOperateur).orElse(null);
-		operateur.getFactures().add(facture);
-		operateurRepository.save(operateur);
-	}
+
+
 
 	@Override
 	public float pourcentageRecouvrement(Date startDate, Date endDate) {
@@ -111,6 +93,6 @@ public class FactureServiceImpl implements IFactureService {
 		float pourcentage=(totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 		return pourcentage;
 	}
-	
+
 
 }
