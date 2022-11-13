@@ -60,7 +60,27 @@ pipeline {
 	                     protocol: 'http',
 	                     repository: 'SpringAchat',
 	                     version: '1.0'
+            	}
             }
-              }
+            
+            stage('Build docker image'){
+				 steps{
+				 script{
+				 sh 'docker build -t youssefboulahia/springprojet .'
+				 }
+				 }
+				 }
+				
+				 stage('Docker login') {
+				
+				 steps {
+					 sh 'echo "login Docker ...."'
+					sh 'docker login -u youssefboulahia -p youssef98'
+					  }  }
+					 stage('Docker push') {
+					 steps {
+					 sh 'echo "Docker is pushing ...."'
+					sh 'docker push youssefboulahia/springprojet'
+				 }  }
         
 } }
