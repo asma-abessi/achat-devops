@@ -58,6 +58,12 @@ pipeline {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
 			}
 		}
+	    stage('Push') {
+
+			steps {
+				sh 'docker push oussemasb/achat:latest'
+			}
+		}
     
 	    
 
