@@ -1,5 +1,9 @@
 pipeline {
     agent any
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('ae30e884-2de1-4829-80a6-099e6db256a2')
+	}
+
  
 
     
@@ -42,7 +46,12 @@ pipeline {
             }
          }
          
-    
+    stage('Docker Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
     
 	    
 
