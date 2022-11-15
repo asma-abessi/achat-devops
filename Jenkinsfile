@@ -45,6 +45,12 @@ pipeline {
                 sh 'mvn install package'
             }
          }
+	    stage('Docker Build') {
+
+			steps {
+				sh 'docker build -t oussamasb/achat .'
+			}
+		}
          
    stage('Docker Login') {
 
