@@ -61,7 +61,7 @@ pipeline {
 	    stage('Push') {
 
 			steps {
-				sh 'docker push oussemasb/achat:latest'
+				sh 'docker push oussamasb/achat:latest'
 			}
 		}
     
