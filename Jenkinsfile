@@ -17,6 +17,7 @@ pipeline {
         	}
         }
         
+        
         stage ('compile') {
 		   steps {
 		     withMaven(maven: 'M2_HOME'){
@@ -25,17 +26,20 @@ pipeline {
 		      }
 		}
 		
+		
 		stage('verify package'){
             steps {
                 sh 'mvn clean package -DskipTests'
             }
         }
         
+        
         stage('test unitaire'){
             steps {
                 sh 'mvn test'
             }
 	    }
+        
         
         stage("sonarqube"){
         steps {
@@ -44,6 +48,7 @@ pipeline {
                 }
         	}
         }
+        
         
         stage("Publish to Nexus Repository Manager") {
             steps {
@@ -62,6 +67,7 @@ pipeline {
 	                     version: '1.0'
             	}
             }
+            
             
             stage('Build docker image'){
 				 steps{
@@ -82,5 +88,11 @@ pipeline {
 					 sh 'echo "Docker is pushing ...."'
 					sh 'docker push youssefboulahia/springprojet'
 				 }  }
+				 
+				 
+			stage('Docker compose') {
+				  steps {
+				   sh 'docker-compose up -d'
+				  }  }
         
 } }
