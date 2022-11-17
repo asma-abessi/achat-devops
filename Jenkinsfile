@@ -94,5 +94,21 @@ pipeline {
 				  steps {
 				   sh 'docker-compose up -d'
 				  }  }
+				  
+				  
+			
         
-} }
+} 
+post {
+	 success {
+	     mail to: "boulahia.youssef@esprit.tn",
+	     subject: "Pipeline Backend Success ",
+	     body: "Welcome to DevOps project Backend : Success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}"
+}
+    failure {
+          mail to: "boulahia.youssef@esprit.tn",
+           subject: "Pipeline backend Failure",
+           body: "Welcome to DevOps project Backend : Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "
+                    }
+                    }
+}
