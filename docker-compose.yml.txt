@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  bd:
+    container_name: mysql
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MY_SQL_PASSWORD: root
+    volumes:
+      - /home/mysql/data:/var/lib/mysql
+  backend:
+    container_name: affectionate_lewin
+    image: oussama53/tpachat
+    restart: on-failure
+    ports:
+      - "8089:8089"
+    depends_on:
+      - "bd"
