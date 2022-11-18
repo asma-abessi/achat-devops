@@ -12,7 +12,7 @@ pipeline {
             steps{
               
                 git branch: 'oussemasb', 
-                credentialsId: '80545ef7-d86b-4f53-b772-91adbe1617f8', 
+                credentialsId: '9acb558c-4d6c-41ed-8b05-0da5b90ab4cc', 
                 url: 'https://github.com/asma-abessi/achat-devops.git'
                     
                 }
