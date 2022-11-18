@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Getting Backend project from Git';
                  git branch:'oussamahamza',
-                 url: 'https://github.com/asma-abessi/achat-devops/'
+                 url: 'https://github.com/asma-abessi/achat-devops.git'
            }
         }
         
